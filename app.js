@@ -1,7 +1,7 @@
 const fs = require('fs');
 const { convertArrayToCSV } = require('convert-array-to-csv');
 const converter = require('convert-array-to-csv');
-const process = require('process');
+const { argv } = require('process');
 
 const genders = ['male', 'female'];
 const maleNames = ['Adrian', 'Rafał', 'Michał', 'Sebastian', 'Marek', 'Bartosz'];
@@ -45,7 +45,16 @@ const arrayToCSV = convertArrayToCSV(peopleCSV, {
   separator: ';'
 });
 
-fs.writeFile('people.csv', arrayToCSV, (err) => {
-  if (err) throw err;
-  console.log('The file has been saved!');
-});
+const command = process.argv[2];
+
+if(command === 'csv'){
+  fs.writeFile('people.csv', arrayToCSV, (err) => {
+    if (err) throw err;
+    console.log('The file has been saved!');
+  });
+}else{
+  fs.writeFile('people.json', arrayToJSON, (err) => {
+    if (err) throw err;
+    console.log('The file has been saved!');
+  });
+}
