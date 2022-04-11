@@ -1,4 +1,7 @@
 const fs = require('fs');
+const { convertArrayToCSV } = require('convert-array-to-csv');
+const converter = require('convert-array-to-csv');
+const process = require('process');
 
 const genders = ['male', 'female'];
 const maleNames = ['Adrian', 'Rafał', 'Michał', 'Sebastian', 'Marek', 'Bartosz'];
@@ -9,7 +12,10 @@ const randChoice = (arr) => {
   return arr[Math.floor(Math.random() * arr.length)]
 };
 
+const header = ['gender', 'firstName', 'lastName', 'age', 'eMail']
+
 const people = [];
+const peopleCSV = [];
 
 for (let i = 0; i < 20; i++) {
   const gender = randChoice(genders);
@@ -27,11 +33,19 @@ for (let i = 0; i < 20; i++) {
     eMail: eMail,
   }
   people.push(person);
+
+  const personCSV = [gender, firstName, lastName, age, eMail]
+  peopleCSV.push(personCSV);
 }
 
 const arrayToJSON = JSON.stringify(people);
 
-fs.writeFile('people.json', arrayToJSON, (err) => {
+const arrayToCSV = convertArrayToCSV(peopleCSV, {
+  header,
+  separator: ';'
+});
+
+fs.writeFile('people.csv', arrayToCSV, (err) => {
   if (err) throw err;
   console.log('The file has been saved!');
 });

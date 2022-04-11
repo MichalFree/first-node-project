@@ -1,0 +1,12 @@
+{
+  "name": "first-node-project",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:MichalFree/first-node-project.git",
+  "author": "Michał Szymański <michal.szymanski1908@gmail.com>",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "convert-array-to-csv": "^2.0.0"
+  }
+}
